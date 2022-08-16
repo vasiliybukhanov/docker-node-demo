@@ -1,10 +1,4 @@
 services:
-  node-demo:
-    image: node-demo:compose
-    ports:
-      - 3000:3000
-    depends_on:
-      - mongo
   mongodb:
     image: mongo
     ports:
@@ -15,8 +9,7 @@ services:
     volumes:
       - mongo-data:/data/db
   mongo-express:
-    image: mongo-express
-    restart: unless-stopped # fixes MongoNetworkError when mongodb is not ready when mongo-express starts    
+    image: mongo-express:wait-for-it # image uses wrapper script that fixes MongoNetworkError when mongodb is not ready when mongo-express starts    
     ports:
       - 8080:8081
     environment:

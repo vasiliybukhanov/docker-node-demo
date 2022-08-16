@@ -1,0 +1,12 @@
+name: load-balancer
+services:
+  nginx:
+    image: nginx:latest
+    ports: 
+      - 4000:80
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro       
+networks:
+  default:
+    name: nginx-network
+    external: true  
